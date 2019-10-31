@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      html,
+      body {
+        overflow: hidden;
+      }
+    </style>
+    <style>
+      #overlay {
+        background: rgba(255, 255, 255, 0.8);
+        color: black;
+        position: absolute;
+        z-index: 1000;
+        width: 100vw;
+        height: 100vh;
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 1s;
+        display: none;
+        /* text-transform: capitalize; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay">You have an error in your class creation</div>
+    <form id="employee-details">
+      <input type="text" value="hector :)" class="name" placeholder="name" />
+      <input type="text" value="900000.1" class="salary" placeholder="salary" />
+      <input
+        type="text"
+        value="CEO"
+        class="department"
+        placeholder="department"
+      />
+      <button class="submit">SAVE NEW EMPLOYEE</button>
+    </form>
+    <!-- <button onclick="saveNewEmployee()">SAVE NEW EMPLOYEE</button> -->
+    <script>
+      let employees = [];
+      let overlayDOMEl = document.querySelector("#overlay");
+
+      overlayDOMEl.onclick = function() {
+        this.style.opacity = 0;
+
+        setTimeout(() => {
+            this.style.display = "none";
+        }, 1000)
+      };
+
+      document.querySelector("#employee-details .submit").onclick = e => {
+        e.preventDefault();
+
+        // saveNewEmployee();
+
+        try {
+          saveNewEmployee();
+        } catch (error) {
+          // debugger
+          //   console.log(error);
+          overlayDOMEl.innerHTML = error.message; //.replace("TypeError: ", "")
+          overlayDOMEl.style.display = "flex";
+        }
+        //   debugger//
+      };
+
+      function saveNewEmployee() {
+        let name = document.querySelector("#employee-details .name").value;
+        let salary = document.querySelector("#employee-details .salary").value;
+        let department = document.querySelector("#employee-details .department")
+          .value;
+
+        employees.push(new Employee(name, salary, department));
+      }
+
+      class Employee {
+        constructor(name, salary, dept) {
+          salary = +salary;
+
+          if (salary % 1 != 0) {
+            throw new TypeError("Your salary has decimals, please fix it");
+          }
+
+          this.name = name;
+          this.salary = salary;
+          this.dept = dept;
+        }
+
+        getSalaryWithTaxes() {
+          return this.salary * 1.21;
+        }
+      }
+    </script>
+  </body>
+</html>
