@@ -25,8 +25,8 @@
 # Goals
 
 * Understand error detection in Javascript providing solutions to the user
-* Work with canvas, styling elements
-* Let's do some creativity and have fun!
+* Work with canvas, styling elements and making animations!
+* Let's do some creativity!
 
 # Bonus
 
