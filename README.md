@@ -32,3 +32,6 @@
 
 One of my favourite videoclips made with canvas
 https://www.youtube.com/watch?v=gkQoCCsu_fA
+
+Throttle and debounce
+https://underscorejs.org/#throttle
