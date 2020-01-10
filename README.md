@@ -14,7 +14,6 @@
 
 # Today - day w2d4
 
-* Talk a bit about try/catch
 * Canvas intro
 * Canvas styling
 * Canvas basic animations
