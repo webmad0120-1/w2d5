@@ -173,10 +173,10 @@ function drawGame() {
 
   ctx.drawImage(scenario, 0, 0);
   obstacles.forEach(obstacleX => {
-    ctx.drawImage(pipe, obstacleX, h2 - 20, 200, 200);
+    ctx.drawImage(pipe, obstacleX, h2 + 70, 200, 200);
   });
 
-  ctx.drawImage(mario, marioObj.x, h2 - 50 + 130, 100, 100);
+  ctx.drawImage(mario, marioObj.x, h2 + 165, 100, 100);
 
   ctx.font = "48px serif";
   ctx.fillText(marioObj.x, 50, 50);
