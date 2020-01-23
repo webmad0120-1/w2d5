@@ -73,7 +73,6 @@ const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min
 const shuffle = array => array.sort(() => Math.random() - 0.5);
 
 function draw() {
-  console.log("draw");
   // Array(1)
   //   .fill()
   //   .forEach(() => {

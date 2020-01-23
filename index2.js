@@ -41,7 +41,7 @@ let marioObj = {
   }
 };
 
-let obstacles = [700];
+let obstacles = [700, 1200];
 
 function drawGame() {
   ctx.clearRect(0, 0, w, h);
