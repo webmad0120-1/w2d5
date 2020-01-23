@@ -6,7 +6,6 @@
 * Context and function invocation using bind, apply, call
 * Closures and scopes with let, const, var
 * Curry (functions returning functions)
-* Threejs fun! 🚀💪🏼
 
 ## Activities 
 * Lab related to work more on unit tests and scopes (Koans)
