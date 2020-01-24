@@ -8,12 +8,21 @@ class Ball {
     this.isMoving = false;
     this.isSpecial = isSpecial;
     this.accelerationRate = 0;
+    this.sense = 1;
 
     if (this.isSpecial)
       this.specialColor = `rgba(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(
         0,
         255
       )}, 1)`;
+  }
+
+  changeSense() {
+    if (this.sense === 1) {
+      this.sense = -1;
+    } else {
+      this.sense = 1;
+    }
   }
 
   _paint() {
@@ -55,10 +64,19 @@ class Ball {
     this.speed += 10;
   }
 
+  moveLeft() {
+    this.speed += this.accelerationRate;
+    if (this.speed < 0) this.speed = 0;
+    this.x -= this.speed * this.sense;
+
+    this._paint();
+    this.isMoving = true;
+  }
+
   moveRight() {
     this.speed += this.accelerationRate;
     if (this.speed < 0) this.speed = 0;
-    this.x += this.speed;
+    this.x += this.speed * this.sense;
 
     this._paint();
     this.isMoving = true;

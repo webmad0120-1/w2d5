@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <style>
+      canvas {
+        background: white;
+      }
+      nav {
+        display: flex;
+        position: fixed;
+        width: 100vw;
+        padding: 20px;
+        top: 0;
+        background: red;
+      }
+      #accelerate,
+      #nitro {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        font-size: 40px;
+      }
+
+      #nitro {
+        left: 250px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="accelerate">Accelerate!</button>
+    <button id="nitro">Nitro</button>
+    <!-- <nav>
+      Jose Henche S.L. Mola el crossfit
+    </nav> -->
+    <canvas id="game"></canvas>
+    <script src="scenario.js"></script>
+    <script src="floor.js"></script>
+    <script src="platform.js"></script>
+    <script src="Ball.js"></script>
+    <script src="platformCollisionDual.js"></script>
+  </body>
+</html>
