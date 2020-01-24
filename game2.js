@@ -7,19 +7,39 @@ const ctx = canvasDOMEl.getContext("2d");
 // let's store all browser dimensions in these variables
 // so we can draw items in their right place
 let w, h, w2, h2, posX;
+let balls;
 const PI = Math.PI;
 const PI_DOUBLE = PI * 2;
-let Ball = {
-  posX: 0,
-  moveRight: function() {
-    this.posX++;
 
+class Ball {
+  constructor(posX, posY, size) {
+    this.posX = posX;
+    this.posY = posY;
+    this.size = size;
+    this.speed = randomFloat(1, 5); // --> 3.16
+  }
+
+  _paint() {
     ctx.beginPath();
-    ctx.arc(this.posX, h2, 50, 0, PI_DOUBLE);
+    ctx.fillStyle = `rgba(0, 255, 0, 1)`;
+    ctx.arc(this.posX, this.posY, this.size, 0, PI_DOUBLE);
     ctx.fill();
     ctx.closePath();
   }
-};
+
+  show() {
+    this._paint();
+  }
+
+  moveRight() {
+    this.posX += this.speed;
+
+    this._paint();
+  }
+}
+
+// let b1 = new Ball(100, 200, 90);
+// let b2 = new Ball(300, 500, 10);
 
 let Scenario = {
   clear: function() {
@@ -30,7 +50,7 @@ let Scenario = {
 function draw() {
   setInterval(() => {
     Scenario.clear();
-    Ball.moveRight();
+    balls.forEach((ball, idx) => (idx % 2 ? ball.show() : ball.moveRight()));
   }, 10);
 }
 
@@ -41,7 +61,11 @@ const setCanvasDimensions = () => {
   h = window.innerHeight;
   w2 = w / 2;
   h2 = h / 2;
-  posX = w2;
+
+  balls = Array(100)
+    .fill()
+    .map(() => new Ball(randomInt(0, w2), randomInt(0, h), randomInt(10, 100)));
+
   canvasDOMEl.setAttribute("width", `${w}px`);
   canvasDOMEl.setAttribute("height", `${h}px`);
 
