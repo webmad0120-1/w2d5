@@ -1,11 +1,13 @@
 class Ball {
-  constructor(posX, posY, size, isSpecial) {
-    this.posX = posX;
-    this.posY = posY;
+  constructor(x, y, size, isSpecial) {
+    this.x = x;
+    this.y = y;
     this.size = size;
-    this.speed = randomFloat(1, 5); // --> 3.16
+    // this.speed = randomFloat(1, 5); // --> 3.16
+    this.speed = 2;
     this.isMoving = false;
     this.isSpecial = isSpecial;
+    this.accelerationRate = 0;
 
     if (this.isSpecial)
       this.specialColor = `rgba(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(
@@ -26,7 +28,7 @@ class Ball {
       }
     }
 
-    ctx.arc(this.posX, this.posY, this.size, 0, PI_DOUBLE);
+    ctx.arc(this.x, this.y, this.size, 0, PI_DOUBLE);
     ctx.fill();
     ctx.closePath();
   }
@@ -36,8 +38,36 @@ class Ball {
     this.isMoving = false;
   }
 
+  setAccelerationRate(acc) {
+    this.accelerationRate = acc;
+  }
+
+  stop() {
+    this.setSpeed(0);
+    this.setAccelerationRate(0);
+  }
+
+  setSpeed(speed) {
+    this.speed = speed;
+  }
+
+  activateNitro() {
+    this.speed += 10;
+  }
+
   moveRight() {
-    this.posX += this.speed;
+    this.speed += this.accelerationRate;
+    if (this.speed < 0) this.speed = 0;
+    this.x += this.speed;
+
+    this._paint();
+    this.isMoving = true;
+  }
+
+  moveDown() {
+    this.speed += this.accelerationRate;
+    if (this.speed < 0) this.speed = 0;
+    this.y += this.speed;
 
     this._paint();
     this.isMoving = true;

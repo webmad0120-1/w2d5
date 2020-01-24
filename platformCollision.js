@@ -11,7 +11,8 @@ const shuffle = array => array.sort(() => Math.random() - 0.5);
 // let's store all browser dimensions in these variables
 // so we can draw items in their right place
 let w, h, w2, h2, posX;
-let balls = [];
+let ball;
+let platforms = [];
 const PI = Math.PI;
 const PI_DOUBLE = PI * 2;
 
@@ -30,23 +31,35 @@ let Game = {
 
     this._initEventListeners();
 
-    balls.push(new Ball(50, h2, 50));
+    ball = new Ball(w2, 200, 50);
+    ball.setSpeed(1);
+    platforms.push(new Platform(w2, h2 + 200, 350, 40));
+    platforms.push(new Platform(w2 - 500, h2 + 100, 350, 40));
   },
   _initEventListeners: function() {
     document.getElementById("accelerate").onclick = function() {
-      balls[0].setAccelerationRate(-0.01);
+      ball.setAccelerationRate(0.01 * 7);
     };
 
     document.getElementById("nitro").onclick = function() {
-      balls[0].activateNitro();
+      ball.activateNitro();
     };
   },
   draw: function() {
     // game engine
     setInterval(() => {
       Scenario.clear();
-      Floor.show();
-      balls.forEach((ball, idx) => ball.moveRight());
+
+      ball.moveDown();
+
+      platforms.forEach(platform => {
+        platform.show();
+
+        if (ball.y - ball.size >= platform.y) {
+          ball.stop();
+          ball.y = platform.y + ball.size;
+        }
+      });
     }, 10);
   },
   // this function sets the proper canvas dimensions
